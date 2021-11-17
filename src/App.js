@@ -102,7 +102,7 @@ const App = () => {
 	 */
 	var timerSecondValue = (60 - seconds) % 60;
 
-	document.title = title + ' ' + timerMinuteValue + ':' + timerSecondValue;
+	document.title = title + ':ㅤ' + (remainingMinutes - (remainingMinutes > 5 ? 5 : 0)) + 'm';
 
 	return (
 		<div className='App'>
