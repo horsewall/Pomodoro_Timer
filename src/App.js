@@ -8,12 +8,19 @@ import useSound from 'use-sound';
  * Internal Imports
  */
 import './App.css'
-import breakPing from './sounds/415510__inspectorj__bell-counter-a.wav';
-import workPing from './sounds/268756__morrisjm__dingaling.mp3';
-import warningPing from './sounds/400695__dm103__pashley-ding-dong-type-bike-bell.wav';
+import breakPing from './sounds/workEnd.wav';
+import workPing from './sounds/workStart.wav';
+import fiveMinutes from './sounds/5minutes.wav';
+import fourMinutes from './sounds/4minutes.wav';
+import threeMinutes from './sounds/3minutes.wav';
+import twoMinutes from './sounds/2minutes.wav';
+import oneMinute from './sounds/1minute.wav';
 
 const App = () => {
-	const [title, setTitle] = useState('Work'); // Used for the header name
+  /**
+   * Used for page header
+   */
+	const [title, setTitle] = useState('Work');
 
 	/**
 	 * Time Variables
@@ -26,7 +33,11 @@ const App = () => {
 	 */
 	const [playBreakPing] = useSound(breakPing);
 	const [playWorkPing] = useSound(workPing);
-	const [playWarningPing] = useSound(warningPing);
+	const [playFiveMinutes] = useSound(fiveMinutes);
+	const [playFourMinutes] = useSound(fourMinutes);
+	const [playThreeeMinutes] = useSound(threeMinutes);
+	const [playTwoMinutes] = useSound(twoMinutes);
+	const [playOneMinute] = useSound(oneMinute);
 
 	/**
 	 * remainingMinutes says how many minutes are left in the half hour
@@ -49,25 +60,34 @@ const App = () => {
 	 */
 	useEffect(() => {
 		switch (remainingMinutes) {
-			case 10:
-			case 9:
+      case 10:
+        playFiveMinutes();
+        break;
+      case 9:
+        playFourMinutes();
+        break;
 			case 8:
+        playThreeeMinutes();
+        break;
 			case 7:
+        playTwoMinutes();
+        break;
 			case 6:
-				playWarningPing();
-				break;
+        playOneMinute();
+        break;
 			case 5:
 				playBreakPing();
 				setTitle('Break');
 				break;
 			case 0:
 				playWorkPing();
-				setTitle('work');
+				setTitle('Work');
 				break;
 			default:
 				break;
-		}
-	}, [minutes, playWarningPing, playBreakPing, playWorkPing, remainingMinutes]);
+    }
+    //eslint-disable-next-line
+	}, [remainingMinutes]);
 
 	return (
 		<div className="App">
