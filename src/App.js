@@ -62,6 +62,7 @@ const App = () => {
 		switch (remainingMinutes) {
 			case 10:
 				playFiveMinutes();
+				setTitle("Work");
 				break;
 			case 9:
 				playFourMinutes();
